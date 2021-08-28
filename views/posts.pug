@@ -8,14 +8,14 @@ html(lang="ja")
     crossorigin="anonymous")
 
     title 秘密の匿名掲示板
-  body.container
+  body.container 
     div.my-3
       a(href="/logout").btn.btn-info.float-right ログアウト
       h1 秘密の匿名掲示板
     h2 新規投稿
     form(method="post" action="/posts")
       div.form-group
-        textarea(name="content" rows="4").form-control
+        textarea(name="content" rows="6").form.control
       div.form-group
         button(type="submit").btn.btn-primary 投稿
     h2 投稿一覧
@@ -23,24 +23,24 @@ html(lang="ja")
       div.card.my-3
         div.card-header
           - let isPostedByAdmin = (post.postedBy === 'admin')
-          if isPostedByAdmin
-            span #{post.id} : 管理人 ★
-          else
-            span #{post.id} : ID:#{post.trackingCookie}
-        div.card-body
-          p.card-text!=post.content
-        div.card-footer
-          div 投稿日時: #{post.createdAt}
-          - let isAdmin = (user === 'admin')
-          if isAdmin
-            div 投稿者: #{post.postedBy}
-          - let isDeletable = (user === post.postedBy || isAdmin)
-          if isDeletable
-            form(method="post" action="/posts?delete=1")
-              input(type="hidden" name="id" value=post.id)
-              button(type="submit").btn.btn-danger.float-right 削除
+        if isPostedByAdmin
+          span #{post.id} : 管理人 ★
+        else 
+          span #{post.id} : ID:#{post.trackingCookie}
+      div.card-body
+        p.card-text!=post.content
+      div.card-footer
+        div 投稿日時: #{post.formattedCreatedAt}
+        - let isAdmin = (user === 'admin')
+        if isAdmin
+          div 投稿者: #{post.postedBy}
+        - let isDeletable = (user === post.postedBy || isAdmin)
+        if isDeletable
+          form(method="post" action="/posts?delete=1")
+            input(type="hidden" name="id" value=post.id)
+            button(type="submit").btn.btn-danger.float-right 削除
 
-    script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js",
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl",
-    crossorigin="anonymous")
+  script(src="https://code.jquery.com/jquery-3.4.1.slim.min.js")
+  script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js",
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl",
+  crossorigin="anonymous")

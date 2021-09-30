@@ -8,6 +8,7 @@ const basic = auth.basic({
   file: './users.htpasswd'
 });
 
+//サーバーを作る
 const server = http.createServer(basic.check((req, res) => {
   router.route(req, res);
 })).on('error', (e) => {

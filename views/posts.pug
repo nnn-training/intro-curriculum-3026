@@ -30,12 +30,12 @@ html(lang="ja")
         div.card-body
           p.card-text!=post.content
         div.card-footer
-          div 投稿日時: #{post.createdAt}
-          - let isAdmin = (user === 'admin')
-          if isAdmin
+            div 投稿日時: #{post.formattedCreatedAt}
+            - let isAdmin = (user === 'admin')
+            if isAdmin
             div 投稿者: #{post.postedBy}
-          - let isDeletable = (user === post.postedBy || isAdmin)
-          if isDeletable
+            - let isDeletable = (user === post.postedBy || isAdmin)
+            if isDeletable
             form(method="post" action="/posts?delete=1")
               input(type="hidden" name="id" value=post.id)
               button(type="submit").btn.btn-danger.float-right 削除

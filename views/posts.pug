@@ -11,6 +11,7 @@ html(lang="ja")
   body.container
     div.my-3
       a(href="/logout").btn.btn-info.float-right ログアウト
+      span.badge.badge-success 今は、「 #{user} 」でログイン中です。
       h1 秘密の匿名掲示板
     h2 新規投稿
     form(method="post" action="/posts")
@@ -30,7 +31,7 @@ html(lang="ja")
         div.card-body
           p.card-text!=post.content
         div.card-footer
-          div 投稿日時: #{post.createdAt}
+          div 投稿日時: #{post.formattedCreatedAt}
           - let isAdmin = (user === 'admin')
           if isAdmin
             div 投稿者: #{post.postedBy}

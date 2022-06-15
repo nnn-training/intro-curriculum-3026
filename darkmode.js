@@ -23,11 +23,13 @@ function updateUserPosts(isLightmode) {
 function setDarkmode() {
   bodyElement.className = "container bg-dark text-white";
   textareaElement.className = "form-control bg-secondary text-white";
+  document.querySelectorAll('button')[1].innerText = 'ライトモードに切り替え';
 }
 
 function setLightmode() {
   bodyElement.className = "container";
   textareaElement.className = "form-control";
+  document.querySelectorAll('button')[1].innerText = 'ダークモードに切り替え'; 
 }
 
 function toggle() {

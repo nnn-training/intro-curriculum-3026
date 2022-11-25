@@ -7,18 +7,19 @@ html(lang="ja")
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm",
     crossorigin="anonymous")
     title NNチャット
-  body(class = currentTheme === 'light' ? "container" : "container bg-dark text-white")
+  body(class = currentTheme === 'light' ? "container" : (currentTheme === 'dark' ? "container bg-dark text-white" : "container bg-success text-white"))
     div.my-3
-      a(href="/logout").btn.btn-info.float-right ログアウト
+      a(href="/logout" class = currentTheme === 'light' ? "btn btn-info float-right" : (currentTheme === 'dark' ? "btn btn-info float-right" : "btn btn-outline-light float-right")) ログアウト
       h1 NNチャット
     form(method="post" action="/posts")
       div.form-group
-        textarea(name="content" rows=4 class = currentTheme === 'light' ? "form-control" : "form-control bg-secondary text-white")
+        textarea(name="content" rows=4 class = currentTheme === 'light' ? "form-control" : (currentTheme === 'dark' ? "form-control bg-secondary text-white" : "form-control bg-warn text-success"))
         button(type="submit").btn.btn-primary 送信
-    a(href="/changeTheme").btn.btn-primary.mb-3 ライトモード・ダークモードの切り替え
+    - let nextTheme = currentTheme === 'light' ? "ダークテーマに変更" : (currentTheme === 'dark' ? "クリスマステーマに変更" : "ライトテーマに変更")
+    a(href="/changeTheme" class = currentTheme === 'light' ? "btn btn-success mb-3" : (currentTheme === 'dark' ? "btn btn-secondary mb-3" : "btn btn-outline-warning mb-3")) #{nextTheme}
 
     h2 投稿一覧
-    - let defaultCardClass = (currentTheme === 'light' ? 'card my-3' : 'card my-3 bg-secondary text-white')
+    - let defaultCardClass = (currentTheme === 'light' ? 'card my-3' : (currentTheme === 'dark' ? 'card my-3 bg-secondary text-white' : "card my-3 bg-light text-success"))
     each post in posts
       - let cardClass = (user === post.postedBy ? 'card my-3 bg-primary text-white' : defaultCardClass)
       div(class=cardClass)

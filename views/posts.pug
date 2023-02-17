@@ -15,7 +15,11 @@ html(lang="ja")
       div.form-group
         textarea(name="content" rows=4 class = currentTheme === 'light' ? "form-control" : "form-control bg-secondary text-white")
         button(type="submit").btn.btn-primary 送信
-    a(href="/changeTheme").btn.btn-primary.mb-3 ライトモード・ダークモードの切り替え
+    //- a(href="/changeTheme").btn.btn-primary.mb-3 ライトモード・ダークモードの切り替え
+    - let changeButton = (currentTheme === 'light' ? 'ダークモードに切り替え' : 'ライトモードに切り替え')
+    //- htmlタグを使わない js 変数を挿入するときは#{}で良い？
+    //- a(href="/changeTheme").btn.btn-primary.mb-3= changeButton
+    a(href="/changeTheme").btn.btn-primary.mb-3 #{changeButton}
 
     h2 投稿一覧
     - let defaultCardClass = (currentTheme === 'light' ? 'card my-3' : 'card my-3 bg-secondary text-white')

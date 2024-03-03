@@ -23,7 +23,10 @@ html(lang="ja")
           - const dropdownMenuColor = (currentTheme === 'light' ? '' : 'dropdown-menu-dark');
           ul.dropdown-menu.dropdown-menu-end(class=dropdownMenuColor aria-labelledby="menu")
             li
-              a.dropdown-item(href="/changeTheme") ライトモード・ダークモードの切り替え
+              if currentTheme == 'light'
+                a.dropdown-item(href="/changeTheme") ダークモードに切り替え
+              else
+                a.dropdown-item(href="/changeTheme") ライトモードに切り替え
               a.dropdown-item(href="/logout") ログアウト
     - const defaultCardColor = (currentTheme === 'light' ? '' : 'bg-dark border-secondary')
     - const ownerCardColor = (currentTheme === 'light' ? 'border-primary' : 'bg-dark border-primary')

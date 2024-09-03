@@ -19,8 +19,13 @@ html(lang="ja")
           button.btn.btn-outline-light.dropdown-toggle(type="button" id="menu" data-bs-toggle="dropdown" aria-expanded="false") #{user}
             i.bi-gear-fill.ms-1
           ul.dropdown-menu.dropdown-menu-end(aria-labelledby="menu")
+            - let changetheme = ''
             li
-              a.dropdown-item(href="/changeTheme") ライトモード・ダークモードの切り替え
+              if currentTheme == 'light'
+                - changetheme = 'ダークモードに切り替え'
+              else
+                - changetheme = 'ライトモードに切り替え'
+              a.dropdown-item(href="/changeTheme") #{changetheme}
               a.dropdown-item(href="/logout") ログアウト
     each post in posts
       - const cardClass = (user === post.postedBy ? 'card my-3 border-primary' : 'card my-3')

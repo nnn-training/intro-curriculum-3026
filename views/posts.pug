@@ -20,7 +20,8 @@ html(lang="ja")
             i.bi-gear-fill.ms-1
           ul.dropdown-menu.dropdown-menu-end(aria-labelledby="menu")
             li
-              a.dropdown-item(href="/changeTheme") ライトモード・ダークモードの切り替え
+              - const themeSwitchText = currentTheme === 'light' ? 'ダーク': 'ライト'
+              a.dropdown-item(href="/changeTheme") #{themeSwitchText}モードに切り替え
               a.dropdown-item(href="/logout") ログアウト
     each post in posts
       - const cardClass = (user === post.postedBy ? 'card my-3 border-primary' : 'card my-3')

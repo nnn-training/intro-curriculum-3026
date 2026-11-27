@@ -20,7 +20,8 @@ html(lang="ja")
             i.bi-gear-fill.ms-1
           ul.dropdown-menu.dropdown-menu-end(aria-labelledby="menu")
             li
-              a.dropdown-item(href="/changeTheme") ライトモード・ダークモードの切り替え
+              - const changeThemeText = (currentTheme === 'light' ? 'ダークモードに切り替え' : 'ライトモードに切り替え');
+              a.dropdown-item(href="/changeTheme") #{changeThemeText}
               a.dropdown-item(href="/logout") ログアウト
     each post in posts
       - const cardClass = (user === post.postedBy ? 'card my-3 border-primary' : 'card my-3')
@@ -28,10 +29,10 @@ html(lang="ja")
         div.card-body
           div.d-flex.justify-content-between
             h5.card-title #{post.postedBy}
-              if post.postedBy === 'admin'
-                i.bi-patch-check-fill.ms-1
+              if post.postedBy === "admin"
+                i.bi-patch-check-fill.ms-1 
             - const tooltipTitle = `<small>${post.absoluteCreatedAt}</small>`
-            small.card-text.float-end(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title=tooltipTitle) #{post.relativeCreatedAt}
+          small.card-text.float-end(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title=tooltipTitle) #{post.relativeCreatedAt}
           p.card-text.lead!= post.content
         - const isDeletable = (user === post.postedBy || user === 'admin')
         if isDeletable
@@ -43,7 +44,7 @@ html(lang="ja")
     div.fixed-bottom.p-4.bg-body
       form(method="post" action="/posts" name="message-form").container-fluid.row.g-3
         div.col-12
-          textarea(name="content" rows="4" placeholder="Ctrl(Command)+Enterで送信できます").form-control
+          textarea(name="content" rows="3" placeholder="Ctrl(Command)+Enterで送信できます").form-control
         div.col-12
           button(type="submit").btn.btn-primary.float-end
             i.bi-send
